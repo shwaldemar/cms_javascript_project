@@ -1,19 +1,47 @@
-<template lang="html">
-  <p>Hello from your valuation app Chae & Mike</p>
+<template>
+  <div>
+    <h2>Hello from your valuation app!</h2>
+    <!-- <p>{{portfolio}}</p> -->
+    <stock-list :stocks='stocks'/>
+  </div>
 </template>
 
 <script>
+import StockList from '@/components/StockList.vue';
+import StockItem from '@/components/StockItem.vue'
+
 import { eventBus } from './main.js';
 
 export default {
   name: 'app',
   data() {
     return {
-      portfolio: []
+      stocks: [
+        {
+          "ticker": "GOOG",
+          "name": "Google",
+          "quantity": 100,
+          "price": 544.45,
+          "totalvalue": 54450
+        },
+        {
+          "ticker": "FB",
+          "name": "FaceBook",
+          "quantity": 100,
+          "price": 64.50,
+          "totalvalue": 6450
+        }
+      ]
     }
-  }
+  },
+  components: {
+    'stock-list': StockList,
+    'stock-item': StockItem
+  },
+  props: ["stock-list"]
 }
+
 </script>
 
-<style lang="css" scoped>
+<style>
 </style>
