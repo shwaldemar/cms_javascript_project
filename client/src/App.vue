@@ -3,7 +3,21 @@
 </template>
 
 <script>
+import StocksService from '@/services/StocksService';
+
 export default {
+  name: 'app',
+  data: function(){
+    return {
+      holdings: []
+    }
+  },
+
+  mounted(){
+    StocksService.getHoldings()
+    .then(holdings => this.holdings = holdings)
+  }
+
 }
 </script>
 
