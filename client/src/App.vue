@@ -6,6 +6,12 @@
 import { eventBus } from './main.js';
 
 export default {
+  name: 'app',
+  data() {
+    return {
+      portfolio: []
+    }
+  }
 }
 </script>
 
