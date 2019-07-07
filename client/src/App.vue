@@ -84,7 +84,7 @@ export default {
       let ticker = "";
       let index = 0;
       let num_entries = 0;
-      let current_value = 0;
+      let current_price = 0;
 
       // loop round all stocks in the array
       for (i = 0; i < this.stock_array.length; i++) {
@@ -96,9 +96,9 @@ export default {
             stock => stock.symbol === ticker)
         // get length of historical data stock_array
         num_entries = this.historicalStockList[index]["historical"].length
-        // pull out the latest value - should maybe be a fetch to api
-        current_value = this.historicalStockList[index]["historical"][num_entries - 1].close
-        this.total_stock_value += (current_value * this.stock_array[i].quantity);
+        // pull out the latest value - can replace with a fetch to api
+        current_price = this.historicalStockList[index]["historical"][num_entries - 1].close
+        this.total_stock_value += (current_price * this.stock_array[i].quantity);
       }
     }
   },
