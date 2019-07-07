@@ -9,15 +9,21 @@ export default {
   name: 'app',
   data: function(){
     return {
-      holdings: []
+      holdings: [],
+      priceData: []
     }
   },
 
   mounted(){
     StocksService.getHoldings()
-    .then(holdings => this.holdings = holdings)
+    .then(holdings => {
+      this.holdings = holdings
+      console.log('inside dot then')
+      StocksService.getHistData()
+        .then(data => this.priceData = data)
+    })
+    console.log('outside dot then')
   }
-
 }
 </script>
 

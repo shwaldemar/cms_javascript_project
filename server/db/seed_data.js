@@ -1,5 +1,5 @@
 use stock_trader;
-db dropDatabase();
+db.dropDatabase();
 
 db.holdings.insertMany([
   {
@@ -16,10 +16,5 @@ db.holdings.insertMany([
     "ticker": "MSFT",
     "name": "Microsoft Corporation",
     "quantity": 250
-  },
-  {
-    "ticker": "CZR",
-    "name": "Caesars Entertainment Corporation",
-    "quantity": 170
   }
 ])
