@@ -2,6 +2,7 @@
   <div>
     <p>Working on data structure setup</p>
     <p>Stock value: {{total_stock_value.toFixed(2)}}</p>
+    <p>All shares summary: {{all_shares_summary}}</p>
   </div>
 </template>
 
@@ -85,6 +86,8 @@ export default {
       let index = 0;
       let num_entries = 0;
       let current_price = 0;
+      let stock_value = 0;
+      let temp_summ_data = [];
 
       // loop round all stocks in the array
       for (i = 0; i < this.stock_array.length; i++) {
@@ -98,7 +101,17 @@ export default {
         num_entries = this.historicalStockList[index]["historical"].length
         // pull out the latest value - can replace with a fetch to api
         current_price = this.historicalStockList[index]["historical"][num_entries - 1].close
+
         this.total_stock_value += (current_price * this.stock_array[i].quantity);
+
+        // Build summary list
+        // Start building summary data to then push onto all_shares_summary
+        temp_summ_data = this.stock_array[i];
+        temp_summ_data["curr_share_price"] = current_price;
+        temp_summ_data["total_value"] = (current_price * this.stock_array[i].quantity).toFixed(2);
+        this.all_shares_summary.push(temp_summ_data);
+        // re-initialize for next round
+        temp_summ_data = [];
       }
     }
   },
