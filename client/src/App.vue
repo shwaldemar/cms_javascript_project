@@ -2,14 +2,11 @@
   <div>
     <h2>Hello from your valuation app!</h2>
     <stock-list :stocks='stocks'/>
-    <stock-detail/>
   </div>
 </template>
 
 <script>
 import StockList from '@/components/StockList.vue';
-import StockItem from '@/components/StockItem.vue'
-import StockDetail from '@/components/StockDetail.vue'
 
 import { eventBus } from './main.js';
 
@@ -17,6 +14,7 @@ export default {
   name: 'app',
   data() {
     return {
+      selectedStock: null,
       stocks: [
         {
           "ticker": "GOOG",
@@ -36,14 +34,15 @@ export default {
     }
   },
   mounted(){
-    
+    eventBus.$on('stock-selected',
+    (stock) => {
+      this.selectedStock = stock
+    })
+
   },
   components: {
     'stock-list': StockList,
-    'stock-item': StockItem,
-    'stock-detail': StockDetail
   },
-  props: ["stock-list"]
 }
 
 </script>
