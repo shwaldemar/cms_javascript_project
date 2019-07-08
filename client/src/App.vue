@@ -1,14 +1,14 @@
 <template>
   <div>
     <h2>Hello from your valuation app!</h2>
-    <stock-list :stocks='all_shares_summary'/>
+    <stock-table :stocks='all_shares_summary'/>
     <new-holding-form></new-holding-form>
   </div>
 </template>
 
 <script>
 import StocksService from '@/services/StocksService';
-import StockList from '@/components/StockList.vue';
+import StockTable from '@/components/StockTable.vue';
 import NewHoldingForm from '@/components/NewHoldingForm';
 import { eventBus } from './main.js';
 
@@ -132,7 +132,7 @@ export default {
 
   },
   components: {
-    'stock-list': StockList,
+    'stock-table': StockTable,
     'new-holding-form': NewHoldingForm
   }
 }
