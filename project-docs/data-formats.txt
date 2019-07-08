@@ -1,0 +1,126 @@
+Mike:
+=====
+From database, at mount :
+[
+  {
+    "ticker": ticker,
+    "name":  name,
+    "num_shares": num_shares
+  },
+  {
+    "ticker": ticker,
+    "name": name,
+    "num_shares": num_shares
+  },
+  ...
+]
+ticker: ticker name, eg AAPL: string
+name: company name, eg Apple Inc : string
+num_shares: number of shares owned: int
+
+Once the above retrieved, loop round each item and construct an API historical data call for all tickers returned from database.
+
+Returned structure from api call should look like:
+{
+  "historicalStockList": [
+    {
+      "symbol": "AAPL",
+      "historical": [
+        {
+          "date": "2014-06-13",
+          "close": 83.6603
+        },
+        {
+          "date": "2014-06-16",
+          "close": 84.5035
+        },
+        .....
+        {
+          "date": "2019-07-04",
+          "close": 204.37
+        },
+        {
+          "date": "2019-07-05",
+          "close": 204.55
+        }
+      ]
+    },
+    {
+      "symbol": "GOOG",
+      "historical": [
+        {
+          "date": "2014-06-13",
+          "close": 551.76
+        },
+        {
+          "date": "2014-06-16",
+          "close": 544.28
+        },
+        ....
+        {
+          "date": "2019-07-04",
+          "close": 1125.20
+        },
+        {
+          "date": "2019-07-05",
+          "close": 1131.16
+        }
+      ]
+    }
+  ]
+}
+
+Chae:
+=====
+This provides the base level data to construct:
+1. data structure to populate list box:
+
+all_shares_summary
+[
+{
+  "ticker": ticker,
+  "name":  name,
+  "quantity": num_shares,
+  "curr_share_price": curr_share_price,
+  "total_value": total_value
+},
+{
+  "ticker": ticker,
+  "name": name,
+  "quantity": num_shares
+  "curr_share_price": curr_share_price,
+  "total_value": total_value
+},
+...
+]
+ticker: ticker name, eg AAPL: string
+name: company name, eg Apple: string
+num_shares: number of shares owned: int
+curr_share_price: current share price: picked off the last entry of historical data for each ticker - shou;d update to dynamic api call 
+total_value: Total value of share-holding for this ticker: curr_share-price * num_shares
+
+
+2. A value for entire share holding, calculated by adding total value of all shares in the portfolio
+
+
+3. An aggregate structure to hold the daily cumulative value of all shares in the holding, to be mapped as one line graph (trend of all share holdings), eg:
+
+"historical": [
+  {
+    "date": "2014-06-13",
+    "close": 1200.89
+  },
+  {
+    "date": "2014-06-16",
+    "close": 1250.55
+  },
+  .....
+  {
+    "date": "2019-07-04",
+    "close": 1310.45
+  },
+  {
+    "date": "2019-07-05",
+    "close": 1300.22
+  }
+]
