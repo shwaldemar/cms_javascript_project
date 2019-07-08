@@ -18,6 +18,9 @@
 </template>
 
 <script>
+import {eventBus} from '../main'
+import StocksService from '../services/StocksService'
+
 export default {
   name: "new-holding-form",
   data: function(){
@@ -69,9 +72,11 @@ export default {
         "name": this.newStock.name,
         "quantity": this.quantity
       }
-      console.log(payload)
+      // console.log(payload)
       this.name = this.newStock = this.quantity = ""
-    }
+      StocksService.postHolding(payload)
+        .then(holding => eventBus.$emit('holding-added', holding)
+    )}
   }
 }
 </script>

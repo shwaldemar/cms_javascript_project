@@ -11,6 +11,16 @@ export default {
     return fetch(baseURLdb)
     .then(res => res.json())
   },
+
+  postHolding(payload){
+    return fetch(baseURLdb, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+    })
+        .then(res => res.json())
+  },
+
   getHistData(ticker){
     return fetch(startURLAPI + ticker + endURLAPI)
     .then(res => res.json())
