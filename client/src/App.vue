@@ -4,6 +4,8 @@
     <p>Stock value: {{total_stock_value.toFixed(2)}}</p>
     <p>All shares summary: {{all_shares_summary}}</p>
     <p>All shares aggregate historic: {{all_shares_aggr_hist}}</p>
+    <button v-on:click="build_stock_summary_total_value" type="button">Hook up backend to middleware</button>
+    <button v-on:click="build_aggregated_historical_object" type="button">Now me for aggregated</button>
   </div>
 </template>
 
