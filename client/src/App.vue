@@ -120,7 +120,7 @@ export default {
       }
     },
     build_aggregated_historical_object() {
-    // This function loops through all the historical data objects and aggregates the close * qty data for each date to allow a composite graph of all shares to be displayed.
+    // This function loops through all the historical data objects and aggregates the close * qty data for each date for all shares to allow a composite graph of all shares to be displayed.
 
       let i;
       let i2;
@@ -140,7 +140,7 @@ export default {
       for (i = 0; i < num_hist_days; i++) {
 
         for (i2 = 0; i2 < num_stocks; i2++) {
-          // Capture date
+          // Capture date for populating new object
           curr_date = this.historicalStockList[i2]["historical"][i].date;
           // Capture ticker
           ticker = this.historicalStockList[i2].symbol;
