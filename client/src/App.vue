@@ -116,9 +116,14 @@ export default {
     StocksService.getHoldings()
     .then(holdings => {
       this.holdings = holdings
-      this.holdings.forEach(holding => {
-        StocksService.getHistData(holding.ticker)
-          .then(data => this.priceData.push(data))
+      const promises = this.holdings.map(holding => {
+        return StocksService.getHistData(holding.ticker)
+      })
+      Promise.all(promises)
+      .then(data => {
+        this.priceData = data
+        this.build_stock_summary_total_value()
+        this.build_aggregated_historical_object()
       })
     })
     eventBus.$on('stock-selected',
