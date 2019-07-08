@@ -4,12 +4,6 @@
     <p>Stock value: {{total_stock_value.toFixed(2)}}</p>
     <p>All shares summary: {{all_shares_summary}}</p>
     <p>All shares aggregate historic: {{all_shares_aggr_hist}}</p>
-
-    <p>start date: {{historicalStockList[0]["historical"][0].date}}</p>
-    <p>first price: {{historicalStockList[0]["historical"][0].close}}</p>
-    <p>Number of days to loop through: {{historicalStockList[0]["historical"].length}}</p>
-    <p>Number of stocks to loop through: {{historicalStockList.length}}</p>
-    <p>ticker: {{historicalStockList[1].symbol}}</p>
   </div>
 </template>
 
