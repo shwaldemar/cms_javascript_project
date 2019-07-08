@@ -9,7 +9,8 @@
     </select>
 
     <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity"  v-model.number="quantity" required>
+    <input type="number" name="quantity"
+    v-model.number="quantity" required min="1">
 
     <input type="submit" name="submit" value="Save">
 
