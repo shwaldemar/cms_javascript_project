@@ -1,21 +1,23 @@
 <template>
-  <div style="overflow-x:auto;">
-    <table style="width:50%">
-      <!-- <tr>
+  <div>
+    <!-- <table>
+      <tr>
       <th>Name:</th>
       <th>Ticker:</th> 
       <th>Quantity:</th>
       <th>Price:</th> 
       <th>Value:</th>
-    </tr> -->
-    <tr>
-      <td>{{ stock.name }}</td>
+    </tr>
+    <tr> -->
+      <!-- <td>{{ stock.name }}</td>
       <td>{{ stock.ticker }}</td> 
       <td>{{ stock.quantity }}</td>
       <td>{{ stock.price }}</td>
-      <td>{{ stock.totalvalue }}</td>
-    </tr>
-  </table>
+      <td>{{ stock.totalvalue }}</td> -->
+    <!-- </tr>
+  </table> -->
+
+  <li v-on:click="handleClick">{{ stock.name }} | {{ stock.ticker }} | {{ stock.quantity }} | {{ stock.price }} | {{ stock.totalvalue }} |</li>
 </div>
 </template>
 
@@ -26,15 +28,17 @@ export default {
   name: 'stock-item',
   props: ['stock'],
   methods: {
-
+    handleClick() {
+      eventBus.$emit('stock-selected', this.stock)
+    }
   }
 }
 </script>
 
 <style>
-/* table {
+table {
   border-spacing: 1px;
-} */
+}
 table, th, td {
   border: 1px solid black;
   border-spacing: 1px;
@@ -43,9 +47,5 @@ table, th, td {
 th, td {
   padding: 2px;
   text-align: justify;
-}
-
-th {
-
 }
 </style>

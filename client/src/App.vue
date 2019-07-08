@@ -1,14 +1,15 @@
 <template>
   <div>
     <h2>Hello from your valuation app!</h2>
-    <!-- <p>{{portfolio}}</p> -->
     <stock-list :stocks='stocks'/>
+    <stock-detail/>
   </div>
 </template>
 
 <script>
 import StockList from '@/components/StockList.vue';
 import StockItem from '@/components/StockItem.vue'
+import StockDetail from '@/components/StockDetail.vue'
 
 import { eventBus } from './main.js';
 
@@ -34,9 +35,13 @@ export default {
       ]
     }
   },
+  mounted(){
+    
+  },
   components: {
     'stock-list': StockList,
-    'stock-item': StockItem
+    'stock-item': StockItem,
+    'stock-detail': StockDetail
   },
   props: ["stock-list"]
 }
