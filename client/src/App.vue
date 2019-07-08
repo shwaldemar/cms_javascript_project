@@ -8,72 +8,17 @@
 </template>
 
 <script>
+import StocksService from '@/services/StocksService';
+
 export default {
-  data(){
+  name: 'app',
+  data: function(){
     return {
+      holdings: [],
+      priceData: [],
       total_stock_value: 0,
       all_shares_summary: [],
       all_shares_aggr_hist: [],
-      // Hard coded seed data for unit testing - start
-
-      holdings: [
-        {
-          "ticker": "AAPL",
-          "name":  "Apple Inc",
-          "quantity": 20
-        },
-        {
-          "ticker": "GOOG",
-          "name": "Google Inc",
-          "quantity": 50
-        }
-      ],
-      priceData: [
-        {
-          "symbol": "GOOG",
-          "historical": [
-            {
-              "date": "2014-06-13",
-              "close": 551.76
-            },
-            {
-              "date": "2014-06-16",
-              "close": 544.28
-            },
-            {
-              "date": "2019-07-04",
-              "close": 1125.20
-            },
-            {
-              "date": "2019-07-05",
-              "close": 1131.16
-            }
-          ]
-        },
-
-        {
-          "symbol": "AAPL",
-          "historical": [
-            {
-              "date": "2014-06-13",
-              "close": 83.6603
-            },
-            {
-              "date": "2014-06-16",
-              "close": 84.5035
-            },
-            {
-              "date": "2019-07-04",
-              "close": 204.37
-            },
-            {
-              "date": "2019-07-05",
-              "close": 204.55
-            }
-          ]
-        }
-      ]
-      // Hard coded seed data for unit testing - end
     }
   },
   methods: {
@@ -164,8 +109,14 @@ export default {
     }
   },
   mounted() {
-    this.build_stock_summary_total_value();
-    this.build_aggregated_historical_object();
+    StocksService.getHoldings()
+    .then(holdings => {
+      this.holdings = holdings
+      this.holdings.forEach(holding => {
+        StocksService.getHistData(holding.ticker)
+          .then(data => this.priceData.push(data))
+      })
+    })
   }
 }
 </script>
