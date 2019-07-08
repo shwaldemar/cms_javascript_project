@@ -15,6 +15,13 @@
       <td>{{ stock.totalvalue }}</td>
       <td <button v-on:click="handleClick(stock)">View Chart</button></td>
     </tr>
+    <tr>
+      <td>ALL STOCKS</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>{{total_stock_value}}</td>
+    </tr>
 
   </div>
 </template>
@@ -23,7 +30,7 @@
 import { eventBus } from '../main.js'
 export default {
   name: 'stock-table',
-  props: ['stocks'],
+  props: ['stocks', 'total_stock_value'],
   methods: {
     handleClick(stock) {
       eventBus.$emit('stock-selected', stock)
