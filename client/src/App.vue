@@ -2,8 +2,6 @@
   <div>
     <h2>Hello from your valuation app!</h2>
     <stock-list :stocks='all_shares_summary'/>
-    <button v-on:click="build_stock_summary_total_value" type="button">Hook up backend to middleware</button>
-    <button v-on:click="build_aggregated_historical_object" type="button">Now me for aggregated</button>
   </div>
 </template>
 
