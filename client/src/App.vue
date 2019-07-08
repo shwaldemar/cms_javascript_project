@@ -15,7 +15,8 @@ export default {
       all_shares_summary: [],
       all_shares_aggr_hist: [],
       // Hard coded seed data for unit testing - start
-      stock_array: [
+
+      holdings: [
         {
           "ticker": "AAPL",
           "name":  "Apple Inc",
@@ -27,7 +28,7 @@ export default {
           "quantity": 50
         }
       ],
-      historicalStockList: [
+      priceData: [
         {
           "symbol": "GOOG",
           "historical": [
@@ -78,7 +79,7 @@ export default {
   methods: {
     build_stock_summary_total_value() {
       // 1. Total value of shareholding
-      // for each share in stock_array
+      // for each share in holdings
         // Determine index for relevant entry in historical data array
         // Locate last entry in historical data object entry for that stock
         // Use the close price * share quantity to get total value of shares
@@ -95,23 +96,23 @@ export default {
       let temp_summ_data = [];
 
       // loop round all stocks in the array
-      for (i = 0; i < this.stock_array.length; i++) {
+      for (i = 0; i < this.holdings.length; i++) {
         // extract the ticker
-        ticker = this.stock_array[i].ticker;
+        ticker = this.holdings[i].ticker;
         // identify the historical data for this ticker
         index =
-          this.historicalStockList.findIndex(
+          this.priceData.findIndex(
             stock => stock.symbol === ticker)
-        // get length of historical data stock_array
-        num_entries = this.historicalStockList[index]["historical"].length
+        // get length of historical data holdings
+        num_entries = this.priceData[index]["historical"].length
         // pull out the latest value - can replace with a fetch to api
-        current_price = this.historicalStockList[index]["historical"][num_entries - 1].close
-        stock_value = current_price * this.stock_array[i].quantity;
+        current_price = this.priceData[index]["historical"][num_entries - 1].close
+        stock_value = current_price * this.holdings[i].quantity;
         this.total_stock_value += stock_value;
 
         // Build summary list
         // Start building summary data to then push onto all_shares_summary
-        temp_summ_data = this.stock_array[i];
+        temp_summ_data = this.holdings[i];
         temp_summ_data["price"] = current_price.toFixed(2);
         temp_summ_data["totalvalue"] = stock_value.toFixed(2);
         this.all_shares_summary.push(temp_summ_data);
@@ -133,24 +134,24 @@ export default {
       let close_price;
 
       // Use first historical element as driver for number of iterations (days of data) - all should be same as that's what's returned from api
-      let num_hist_days = this.historicalStockList[0]["historical"].length;
+      let num_hist_days = this.priceData[0]["historical"].length;
       // number of stocks to loop through
-      let num_stocks = this.historicalStockList.length;
+      let num_stocks = this.priceData.length;
 
       for (i = 0; i < num_hist_days; i++) {
 
         for (i2 = 0; i2 < num_stocks; i2++) {
           // Capture date for populating new object
-          curr_date = this.historicalStockList[i2]["historical"][i].date;
+          curr_date = this.priceData[i2]["historical"][i].date;
           // Capture ticker
-          ticker = this.historicalStockList[i2].symbol;
+          ticker = this.priceData[i2].symbol;
           // Capture no of shares for this ticker
           index =
-            this.stock_array.findIndex(
+            this.holdings.findIndex(
               stock => stock.ticker === ticker)
-          qty = this.stock_array[index].quantity;
+          qty = this.holdings[index].quantity;
           // Capture close current_price
-          close_price =  this.historicalStockList[i2]["historical"][i].close;
+          close_price =  this.priceData[i2]["historical"][i].close;
           // Add into running total for this date
           daily_total += (close_price * qty);
         }
