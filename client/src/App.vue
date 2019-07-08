@@ -18,11 +18,11 @@ export default {
     StocksService.getHoldings()
     .then(holdings => {
       this.holdings = holdings
-      console.log('inside dot then')
-      StocksService.getHistData()
-        .then(data => this.priceData = data)
+      this.holdings.forEach(holding => {
+        StocksService.getHistData(holding.ticker)
+          .then(data => this.priceData.push(data))
+      })
     })
-    console.log('outside dot then')
   }
 }
 </script>
