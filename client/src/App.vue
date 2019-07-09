@@ -3,6 +3,7 @@
     <h2>Hello from your valuation app!</h2>
     <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
+    <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import StocksService from '@/services/StocksService';
 import StockTable from '@/components/StockTable.vue';
 import NewHoldingForm from '@/components/NewHoldingForm';
+import TrendChart from '@/components/TrendChart.vue';
 import { eventBus } from './main.js';
 
 export default {
@@ -21,7 +23,8 @@ export default {
       priceData: [],
       total_stock_value: 0,
       all_shares_summary: [],
-      all_shares_aggr_hist: []
+      all_shares_aggr_hist: [],
+      stockData: null,
     }
   },
   methods: {
@@ -123,6 +126,12 @@ export default {
         this.priceData = data
         this.build_stock_summary_total_value()
         this.build_aggregated_historical_object()
+        this.stockData = this.all_shares_aggr_hist
+
+        // Ref for further work
+        // this.stockData =
+        //   this.priceData[this.priceData.findIndex(stock => stock.symbol === "MSFT")].historical
+
       })
     })
     eventBus.$on('stock-selected',
@@ -139,7 +148,8 @@ export default {
   },
   components: {
     'stock-table': StockTable,
-    'new-holding-form': NewHoldingForm
+    'new-holding-form': NewHoldingForm,
+    'trend-chart': TrendChart
   }
 }
 
