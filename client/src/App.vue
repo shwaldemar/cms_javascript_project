@@ -130,6 +130,12 @@ export default {
       this.selectedStock = stock
     })
 
+    // const consoleLogAStringToMakeSureItWorks = () => {
+    //   console.log("All Stocks Selected hit");
+    // }
+
+    eventBus.$on('all-stocks-selected', () => {
+      console.log("All Stocks Selected hit")})
   },
   components: {
     'stock-table': StockTable,

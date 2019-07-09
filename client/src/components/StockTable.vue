@@ -21,6 +21,7 @@
       <td>-</td>
       <td>-</td>
       <td>{{total_stock_value}}</td>
+      <td <button v-on:click="handleAllStocksClick">View Chart</button></td>
     </tr>
 
   </div>
@@ -34,6 +35,9 @@ export default {
   methods: {
     handleClick(stock) {
       eventBus.$emit('stock-selected', stock.ticker)
+    },
+    handleAllStocksClick() {
+      eventBus.$emit('all-stocks-selected', "")
     }
   }
 }
