@@ -1,15 +1,17 @@
 <template>
   <div>
     <h2>Hello from your valuation app!</h2>
-    <stock-list :stocks='all_shares_summary'/>
+    <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
+    <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
   </div>
 </template>
 
 <script>
 import StocksService from '@/services/StocksService';
-import StockList from '@/components/StockList.vue';
+import StockTable from '@/components/StockTable.vue';
 import NewHoldingForm from '@/components/NewHoldingForm';
+import TrendChart from '@/components/TrendChart.vue';
 import { eventBus } from './main.js';
 
 export default {
@@ -21,7 +23,8 @@ export default {
       priceData: [],
       total_stock_value: 0,
       all_shares_summary: [],
-      all_shares_aggr_hist: []
+      all_shares_aggr_hist: [],
+      stockData: null,
     }
   },
   methods: {
@@ -124,6 +127,12 @@ export default {
 
         this.build_stock_summary_total_value()
         this.build_aggregated_historical_object()
+        this.stockData = this.all_shares_aggr_hist
+
+        // Ref for further work
+        // this.stockData =
+        //   this.priceData[this.priceData.findIndex(stock => stock.symbol === "MSFT")].historical
+
       })
     })
     eventBus.$on('stock-selected',
@@ -142,10 +151,17 @@ export default {
         })
     })
 
+    // const consoleLogAStringToMakeSureItWorks = () => {
+    //   console.log("All Stocks Selected hit");
+    // }
+
+    eventBus.$on('all-stocks-selected', () => {
+      console.log("All Stocks Selected hit")})
   },
   components: {
-    'stock-list': StockList,
-    'new-holding-form': NewHoldingForm
+    'stock-table': StockTable,
+    'new-holding-form': NewHoldingForm,
+    'trend-chart': TrendChart
   }
 }
 
