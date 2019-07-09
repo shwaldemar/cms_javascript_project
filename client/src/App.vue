@@ -24,7 +24,7 @@ export default {
       total_stock_value: 0,
       all_shares_summary: [],
       all_shares_aggr_hist: [],
-      // all_shares_value: [],
+      all_shares_value: [],
       stockData: null
     }
   },
@@ -113,13 +113,12 @@ export default {
         daily_total = 0;
         temp_aggr_data = [];
       }
+    },
+    build_shares_value_object() {
+      this.all_shares_value =
+        this.all_shares_summary.map(share => {
+       return { "ticker": share.ticker, "totalvalue": share.totalvalue } } )
     }
-// ,
-    // build_shares_value_object() {
-    //   this.all_shares_value =
-    //     this.all_shares_summary.map(share => { {"ticker": this.ticker, "totalvalue": this.totalvalue } } )
-    //   }
-    // }
   },
   mounted() {
     StocksService.getHoldings()
@@ -134,6 +133,7 @@ export default {
 
         this.build_stock_summary_total_value()
         this.build_aggregated_historical_object()
+        this.build_shares_value_object()
         // Default trend view on app open
         this.stockData = this.all_shares_aggr_hist
       })
