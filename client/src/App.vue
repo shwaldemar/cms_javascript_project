@@ -127,18 +127,17 @@ export default {
 
         this.build_stock_summary_total_value()
         this.build_aggregated_historical_object()
+        // Default trend view on app open
         this.stockData = this.all_shares_aggr_hist
-
-        // Ref for further work
-        // this.stockData =
-        //   this.priceData[this.priceData.findIndex(stock => stock.symbol === "MSFT")].historical
-
       })
     })
     eventBus.$on('stock-selected',
     (stock) => {
       this.selectedStock = stock
+      this.stockData =
+        this.priceData[this.priceData.findIndex(stock => stock.symbol === this.selectedStock)].historical
     })
+
     eventBus.$on('holding-added', (holding) => {
       this.holdings.push(holding)
       StocksService.getHistData(holding.ticker)
