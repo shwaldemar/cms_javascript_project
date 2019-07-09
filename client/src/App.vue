@@ -129,6 +129,9 @@ export default {
     (stock) => {
       this.selectedStock = stock
     })
+    eventBus.$on('holding-added', (holding) => {
+      console.log(holding);
+    })
 
   },
   components: {

@@ -30,10 +30,6 @@ export default {
       quantity: "",
       newStockOptions: [
         {
-          "ticker": "HPQ",
-          "name": "HP Inc."
-        },
-        {
           "ticker": "F",
           "name": "Ford Motor Company"
         },
