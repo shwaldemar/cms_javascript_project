@@ -121,6 +121,7 @@ export default {
       Promise.all(promises)
       .then(data => {
         this.priceData = data
+
         this.build_stock_summary_total_value()
         this.build_aggregated_historical_object()
       })
@@ -130,7 +131,15 @@ export default {
       this.selectedStock = stock
     })
     eventBus.$on('holding-added', (holding) => {
-      console.log(holding);
+      this.holdings.push(holding)
+      StocksService.getHistData(holding.ticker)
+        .then(data => {
+          this.priceData.push(data)
+          this.all_shares_summary = []
+          this.all_shares_aggr_hist = []
+          this.build_stock_summary_total_value()
+          this.build_aggregated_historical_object()
+        })
     })
 
   },
