@@ -3,8 +3,14 @@
     <h2>Hello from your valuation app!</h2>
     <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
-    <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
+    <!-- <div> -->
+      <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
+    <!-- </div> -->
+    <div>
+      <value-chart v-if="valueData" :valueData="valueData"></value-chart>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -12,6 +18,7 @@ import StocksService from '@/services/StocksService';
 import StockTable from '@/components/StockTable.vue';
 import NewHoldingForm from '@/components/NewHoldingForm';
 import TrendChart from '@/components/TrendChart.vue';
+import ValueChart from '@/components/ValueChart.vue';
 import { eventBus } from './main.js';
 
 export default {
@@ -25,7 +32,8 @@ export default {
       all_shares_summary: [],
       all_shares_aggr_hist: [],
       all_shares_value: [],
-      stockData: null
+      stockData: null,
+      valueData: null
     }
   },
   methods: {
@@ -65,8 +73,8 @@ export default {
         // Build summary list
         // Start building summary data to then push onto all_shares_summary
         temp_summ_data = this.holdings[i];
-        temp_summ_data["price"] = current_price.toFixed(2);
-        temp_summ_data["totalvalue"] = stock_value.toFixed(2);
+        temp_summ_data["price"] = current_price;
+        temp_summ_data["totalvalue"] = stock_value;
         this.all_shares_summary.push(temp_summ_data);
         // re-initialize for next round
         temp_summ_data = [];
@@ -115,7 +123,7 @@ export default {
       }
     },
     build_shares_value_object() {
-      this.all_shares_value =
+      this.valueData =
         this.all_shares_summary.map(share => {
        return { "ticker": share.ticker, "totalvalue": share.totalvalue } } )
     }
@@ -152,9 +160,11 @@ export default {
           this.priceData.push(data)
           this.all_shares_summary = []
           this.all_shares_aggr_hist = []
+          this.valueData = []
           this.total_stock_value = 0
           this.build_stock_summary_total_value()
           this.build_aggregated_historical_object()
+          this.build_shares_value_object()
         })
     })
 
@@ -168,7 +178,8 @@ export default {
   components: {
     'stock-table': StockTable,
     'new-holding-form': NewHoldingForm,
-    'trend-chart': TrendChart
+    'trend-chart': TrendChart,
+    'value-chart': ValueChart
   }
 }
 
