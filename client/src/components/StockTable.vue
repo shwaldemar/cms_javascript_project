@@ -33,7 +33,7 @@ export default {
   props: ['stocks', 'total_stock_value'],
   methods: {
     handleClick(stock) {
-      eventBus.$emit('stock-selected', stock)
+      eventBus.$emit('stock-selected', stock.ticker)
     }
   }
 }
