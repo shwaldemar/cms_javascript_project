@@ -2,8 +2,8 @@
   <div>
     <h2>Hello from your valuation app!</h2>
     <stock-list :stocks='all_shares_summary'/>
-    <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
     <new-holding-form></new-holding-form>
+    <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ export default {
       total_stock_value: 0,
       all_shares_summary: [],
       all_shares_aggr_hist: [],
-      stockData: null
+      stockData: null,
     }
   },
   methods: {
@@ -127,6 +127,11 @@ export default {
         this.build_stock_summary_total_value()
         this.build_aggregated_historical_object()
         this.stockData = this.all_shares_aggr_hist
+
+        // Ref for further work
+        // this.stockData =
+        //   this.priceData[this.priceData.findIndex(stock => stock.symbol === "MSFT")].historical
+
       })
     })
     eventBus.$on('stock-selected',
