@@ -146,6 +146,7 @@ export default {
           this.priceData.push(data)
           this.all_shares_summary = []
           this.all_shares_aggr_hist = []
+          this.total_stock_value = 0
           this.build_stock_summary_total_value()
           this.build_aggregated_historical_object()
         })
