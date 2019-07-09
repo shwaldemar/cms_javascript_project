@@ -24,7 +24,8 @@ export default {
       total_stock_value: 0,
       all_shares_summary: [],
       all_shares_aggr_hist: [],
-      stockData: null,
+      // all_shares_value: [],
+      stockData: null
     }
   },
   methods: {
@@ -113,6 +114,12 @@ export default {
         temp_aggr_data = [];
       }
     }
+// ,
+    // build_shares_value_object() {
+    //   this.all_shares_value =
+    //     this.all_shares_summary.map(share => { {"ticker": this.ticker, "totalvalue": this.totalvalue } } )
+    //   }
+    // }
   },
   mounted() {
     StocksService.getHoldings()
@@ -156,7 +163,7 @@ export default {
     // }
 
     eventBus.$on('all-stocks-selected', () => {
-      console.log("All Stocks Selected hit")})
+      this.stockData = this.all_shares_aggr_hist})
   },
   components: {
     'stock-table': StockTable,
