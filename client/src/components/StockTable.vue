@@ -16,7 +16,7 @@
       <td>{{ stock.price }}</td>
       <td>{{ stock.totalvalue }}</td>
       <td> <button v-on:click="handleClick(stock)">View Chart</button></td>
-      <td> <button v-on:click="handleDelHoldingClick(stock._id)">Delete Holding</button></td>
+      <td> <button v-on:click="handleDelHoldingClick(stock)">Delete Holding</button></td>
     </tr>
     <tr>
       <td>ALL STOCKS</td>
@@ -43,9 +43,9 @@ export default {
     handleAllStocksClick() {
       eventBus.$emit('all-stocks-selected', "")
     },
-    handleDelHoldingClick(id) {
-      StocksService.deleteHolding(id)
-        .then (response => eventBus.$emit('holding-deleted', id))
+    handleDelHoldingClick(stock) {
+      StocksService.deleteHolding(stock._id)
+        .then (response => eventBus.$emit('holding-deleted', stock))
     }
   }
 }

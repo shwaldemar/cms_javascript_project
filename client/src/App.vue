@@ -159,8 +159,8 @@ export default {
     eventBus.$on('all-stocks-selected', () => {
       console.log("All Stocks Selected hit")})
 
-    eventBus.$on('holding-deleted', id => {
-      const index = this.holdings.indexOf(holding => holding.id === id);
+    eventBus.$on('holding-deleted', stock => {
+      const index = this.holdings.indexOf(holding => holding.id === stock._id);
       this.holdings.splice(index, 1);
     })
   },
