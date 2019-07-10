@@ -31,7 +31,7 @@ export default {
     chartData: function() {
       if(this.stockData) {
         const chartData = this.stockData.map(stock => Object.values(stock))
-        chartData[0] = Object.keys(this.stockData[0])
+        chartData.splice(0, 0, Object.keys(this.stockData[0]));
         return chartData
       }
       return null
