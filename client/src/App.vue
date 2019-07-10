@@ -171,9 +171,10 @@ export default {
           this.build_stock_summary_total_value()
           this.build_aggregated_historical_object()
           this.build_shares_value_object()
-          if (this.selectedStock = "") {
-            this.stockData = this.all_shares_aggr_hist;
-          }
+
+          this.stockData = this.all_shares_aggr_hist;
+          this.chartTitle = "Aggregated Stock Value - Daily Basis"
+
         })
     })
 
@@ -206,6 +207,10 @@ export default {
       this.total_stock_value = 0
       this.build_stock_summary_total_value()
       this.build_aggregated_historical_object()
+      this.build_shares_value_object()
+
+      this.stockData = this.all_shares_aggr_hist;
+      this.chartTitle = "Aggregated Stock Value - Daily Basis"
     })
   },
   components: {
