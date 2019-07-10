@@ -155,8 +155,8 @@ export default {
       this.selectedStock = stock
       this.stockData =
         this.priceData[this.priceData.findIndex(stock => stock.symbol === this.selectedStock)].historical;
-      // this.chartTitle = all_shares_summary[all_shares_summary.findIndex(
-      //   stock => stock.ticker === this.selectedStock].name;
+      this.chartTitle = this.all_shares_summary[this.all_shares_summary.findIndex(
+        stock => stock.ticker === this.selectedStock)].name;
     })
 
     eventBus.$on('holding-added', (holding) => {
