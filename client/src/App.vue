@@ -162,6 +162,13 @@ export default {
     eventBus.$on('holding-deleted', stock => {
       const index = this.holdings.indexOf(holding => holding.id === stock._id);
       this.holdings.splice(index, 1);
+      const index2 = this.priceData.indexOf(histForTicker => histForTicker.symbol === stock.ticker);
+      this.priceData.splice(index2, 1)
+      this.all_shares_summary = []
+      this.all_shares_aggr_hist = []
+      this.total_stock_value = 0
+      this.build_stock_summary_total_value()
+      this.build_aggregated_historical_object()
     })
   },
   components: {
