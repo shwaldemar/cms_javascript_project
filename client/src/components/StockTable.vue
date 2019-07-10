@@ -11,8 +11,8 @@
       <td>{{ stock.name }}</td>
       <td>{{ stock.ticker }}</td>
       <td>{{ stock.quantity }}</td>
-      <td>{{ stock.price }}</td>
-      <td>{{ stock.totalvalue }}</td>
+      <td>{{ stock.price.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
+      <td>{{ stock.totalvalue.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
       <td <button v-on:click="handleClick(stock)">View Chart</button></td>
     </tr>
     <tr>
