@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Hello from your valuation app!</h2>
+    <h2>Stock Portfolio Tracker</h2>
     <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
     <!-- <div> -->
