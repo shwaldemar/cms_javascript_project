@@ -10,12 +10,14 @@
     <tr v-for="stock in stocks" >
       <td>{{ stock.name }}</td>
       <td>{{ stock.ticker }}</td>
-      <td>{{ stock.quantity }}</td>
+      <td v-if="!editable">{{ stock.quantity }}</td>
+      <td v-else> <input type="number" name="quantity"
+      v-model.number="stock.quantity" required min="1"> </td>
       <td>{{ stock.price }}</td>
       <td>{{ stock.totalvalue }}</td>
       <td <button v-on:click="handleClick(stock)">View Chart</button></td>
-      <td> <button>Edit</button>  </td>
-      <td> <button v-show=false >Confirm</button>  </td>
+      <td> <button v-on:click="setEdit(stock)">Edit</button>  </td>
+      <td> <button v-show="editable" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
     </tr>
     <tr>
       <td>ALL STOCKS</td>
@@ -31,12 +33,27 @@
 
 <script>
 import { eventBus } from '../main.js'
+import StocksService from '@/services/StocksService';
+
 export default {
   name: 'stock-table',
   props: ['stocks', 'total_stock_value'],
+  data() {
+    return {
+      editable: false
+    }
+  }, //comma inserted to fix error
   methods: {
     handleClick(stock) {
       eventBus.$emit('stock-selected', stock.ticker)
+    },
+    setEdit(stock) {
+      console.log(stock);
+      this.editable = true
+    }, // inserted comma to solve error
+    handleStockEdit(stock) {
+      StocksService.updateHolding(stock)
+      this.editable= false
     },
     handleAllStocksClick() {
       eventBus.$emit('all-stocks-selected', "")

@@ -22,7 +22,7 @@ export default {
   },
 
   updateHolding(payload) {
-    return fetch(baseURL +payload._id, {
+    return fetch(baseURLdb +  "/" + payload._id, { // added db to fix misnaming error
       method: 'PUT',
       body: JSON.stringify(payload),
       headers: {'Content-Type': 'application/json'}
