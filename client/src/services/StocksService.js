@@ -1,4 +1,4 @@
-const baseURLdb = 'http://localhost:3000/api/holdings'
+const baseURLdb = 'http://localhost:3000/api/holdings/'
 // const hardCodeURLAPI = 'https://financialmodelingprep.com/api/v3/historical-price-full/INTC,GE,MSFT?serietype=line'
 const startURLAPI = 'https://financialmodelingprep.com/api/v3/historical-price-full/'
 const endURLAPI = '?serietype=line'
@@ -19,6 +19,12 @@ export default {
       headers: {'Content-Type': 'application/json'}
     })
         .then(res => res.json())
+  },
+
+  deleteHolding(id) {
+    return fetch(baseURLdb + id, {
+      method: 'DELETE'
+    })
   },
 
   getHistData(ticker){
