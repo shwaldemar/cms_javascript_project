@@ -1,46 +1,48 @@
 <template>
   <div>
-<table class="data-table">
-    <tr>
-      <th class="table-header" scope="col">Stock Name</th>
-      <th class="table-header" scope="col">Ticker</th>
-      <th class="table-header" scope="col">Quantity</th>
-      <th class="table-header" scope="col">Price</th>
-      <th class="table-header" scope="col">Holding Value</th>
-    </tr>
-    <tr v-for="stock in stocks" >
-      <td>{{ stock.name }}</td>
-      <td>{{ stock.ticker }}</td>
+    <table class="data-table">
+      <tr>
+        <th class="table-header" scope="col">Stock Name</th>
+        <th class="table-header" scope="col">Ticker</th>
+        <th class="table-header" scope="col">Quantity</th>
+        <th class="table-header" scope="col">Price</th>
+        <th class="table-header" scope="col">Holding Value</th>
+      </tr>
+      <tr v-for="stock in stocks" >
+        <td>{{ stock.name }}</td>
+        <td>{{ stock.ticker }}</td>
 
-      <td v-if="editable !== stock._id">{{ stock.quantity }}</td>
-      <td v-if="editable === stock._id"> <input type="number" name="quantity"
-      v-model.number="stock.quantity" required min="1"> </td>
+        <td v-if="editable !== stock._id">{{ stock.quantity }}</td>
+        <td v-if="editable === stock._id"> <input type="number" name="quantity"
+          v-model.number="stock.quantity" required min="1"> </td>
 
-      <td>{{ stock.price.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
-      <td>{{ stock.totalvalue.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
+          <td>{{ stock.price.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
+          <td>{{ stock.totalvalue.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
 
-      <td> <button v-on:click="handleClick(stock)">View</button></td>
+          <td> <button v-on:click="handleClick(stock)">View</button></td>
 
-      <td> <button v-on:click="setEdit(stock)">Edit</button>  </td>
+          <td> <button v-on:click="setEdit(stock)">Edit</button>  </td>
 
 
-      <td> <button v-on:click="handleDelHoldingClick(stock)">Delete</button></td>
+          <td> <button v-on:click="handleDelHoldingClick(stock)">Delete</button></td>
 
-      <td> <button v-show="editable === stock._id" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
+          <td> <button v-show="editable === stock._id" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
 
-    </tr>
-    <tr>
-      <td class="table-summary">ALL STOCKS</td>
-      <td class="table-summary"></td>
-      <td class="table-summary"></td>
-      <td class="table-summary"></td>
-      <td class="table-summary">{{ total_stock_value.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
-      <td></td>
-      <!-- <td></td> -->
-      <td> <button v-on:click="handleAllStocksClick">View Aggregate Chart</button></td>
-    </tr>
-</table>
-    <hr>
+        </tr>
+        <tr>
+          <td class="table-summary">ALL STOCKS</td>
+          <td class="table-summary"></td>
+          <td class="table-summary"></td>
+          <td class="table-summary"></td>
+          <td class="table-summary">{{ total_stock_value.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
+          <td></td>
+          <!-- <td></td> -->
+          <td> <button v-on:click="handleAllStocksClick">View Aggregate Chart</button></td>
+        </tr>
+      </table>
+<p></p>
+     <!-- <hr> -->
+<p></p>
   </div>
 
 </template>
@@ -90,7 +92,7 @@ form, td, th, tr, h2 {
 }
 
 td {
-  padding: 5px 20px 3px 5px;
+  padding: 5px 20px 0px 5px;
 }
 
 h2 {
@@ -116,6 +118,7 @@ h2 {
 .table-summary {
   font-weight: bold;
   padding-top: 10px;
+  padding-left: 10px;
 }
 
 button,
@@ -126,7 +129,7 @@ button,
   color: darkblue;
   background-color: lightblue;
   font-family: arial;
-  border-outline: none;
+  outline: none;
 }
 
 /* .btn:hover {

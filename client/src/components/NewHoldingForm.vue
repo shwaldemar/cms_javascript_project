@@ -1,18 +1,19 @@
 <template lang="html">
   <form v-on:submit="handleSubmit">
 
-    <label for="stock_select">Select Stock:</label>
+    <label for="stock_select">Add Stock&nbsp&nbsp</label>
     <select name="stock_select" v-model="newStock" required>
       <option disabled value="">Select a stock</option>
       <option v-for="newStock in newStockOptions" :value="newStock">{{newStock.name}} ({{newStock.ticker}})</option>
 
     </select>
-
-    <label for="quantity">Quantity:</label>
+    &nbsp&nbsp&nbsp&nbsp
+    <label for="quantity">Quantity</label>
+    &nbsp&nbsp
     <input type="number" name="quantity"
     v-model.number="quantity" required min="1">
-
-    <input type="submit" name="submit" value="Save">
+    &nbsp&nbsp&nbsp&nbsp
+    <input class="btn" type="submit" name="submit" value="Save">
 
   </form>
 </template>
@@ -78,4 +79,21 @@ export default {
 </script>
 
 <style lang="css" scoped>
+form {
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 850px;
+}
+
+button,
+.btn,
+.btn-db-danger,
+.btn-db-update {
+  border-radius: 5px;
+  color: darkblue;
+  background-color: lightblue;
+  font-family: arial;
+  outline: none;
+}
 </style>
