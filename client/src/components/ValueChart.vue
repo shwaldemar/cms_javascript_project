@@ -2,7 +2,7 @@
 
 <GChart
 v-if="chartData"
-type="LineChart"
+type="BarChart"
 :data="chartData"
 :options="chartOptions"
 />
@@ -13,25 +13,25 @@ type="LineChart"
 import { GChart } from 'vue-google-charts'
 
 export default {
-  name: "trend-chart",
+  name: "value-chart",
   data() {
     return {
       chartOptions: {
         width: 800,
         height: 240,
-        title: "Stock Price History"
+        title: "Stock Values"
       }
     }
   },
-  props: ['stockData'],
+  props: ['valueData'],
   components: {
     GChart
   },
   computed: {
     chartData: function() {
-      if(this.stockData) {
-        const chartData = this.stockData.map(stock => Object.values(stock))
-        chartData.splice(0, 0, Object.keys(this.stockData[0]));
+      if(this.valueData) {
+        const chartData = this.valueData.map(value => Object.values(value))
+        chartData.splice(0, 0, Object.keys(this.valueData[0]));
         return chartData
       }
       return null
