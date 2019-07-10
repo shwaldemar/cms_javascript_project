@@ -39,6 +39,12 @@ export default {
 
     },
 
+    deleteHolding(id) {
+      return fetch(baseURLdb + id, {
+        method: 'DELETE'
+      })
+    },
+
   getHistData(ticker){
     return fetch(startURLAPI + ticker + endURLAPI)
     .then(res => res.json())
