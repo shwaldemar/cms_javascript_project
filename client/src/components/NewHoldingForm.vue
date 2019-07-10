@@ -13,7 +13,7 @@
     <input type="number" name="quantity"
     v-model.number="quantity" required min="1">
     &nbsp&nbsp&nbsp&nbsp
-    <input class="btn" type="submit" name="submit" value="Save">
+    <input class="btn-update" type="submit" name="submit" value="Save">
 
   </form>
 </template>
@@ -72,7 +72,7 @@ export default {
       // console.log(payload)
       this.name = this.newStock = this.quantity = ""
       StocksService.postHolding(payload)
-        .then(holding => eventBus.$emit('holding-added', holding)
+      .then(holding => eventBus.$emit('holding-added', holding)
     )}
   }
 }
@@ -84,16 +84,5 @@ form {
   border-radius: 5px;
   padding: 10px;
   max-width: 850px;
-}
-
-button,
-.btn,
-.btn-db-danger,
-.btn-db-update {
-  border-radius: 5px;
-  color: darkblue;
-  background-color: lightblue;
-  font-family: arial;
-  outline: none;
 }
 </style>

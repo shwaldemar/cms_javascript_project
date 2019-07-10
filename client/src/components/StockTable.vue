@@ -19,14 +19,14 @@
           <td>{{ stock.price.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
           <td>{{ stock.totalvalue.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
 
-          <td> <button v-on:click="handleClick(stock)">View</button></td>
+          <td> <button class="btn" v-on:click="handleClick(stock)">View</button></td>
 
-          <td> <button v-on:click="setEdit(stock)">Edit</button>  </td>
+          <td> <button class="btn" v-on:click="setEdit(stock)">Edit</button>  </td>
 
 
-          <td> <button v-on:click="handleDelHoldingClick(stock)">Delete</button></td>
+          <td> <button class="btn-danger" v-on:click="handleDelHoldingClick(stock)">Delete</button></td>
 
-          <td> <button v-show="editable === stock._id" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
+          <td> <button class="btn-update" v-show="editable === stock._id" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
 
         </tr>
         <tr>
@@ -37,7 +37,7 @@
           <td class="table-summary">{{ total_stock_value.toLocaleString("en-GB", {style: "currency", currency: "GBP", minimumFractionDigits: 2}) }}</td>
           <td></td>
           <!-- <td></td> -->
-          <td> <button v-on:click="handleAllStocksClick">View Aggregate Chart</button></td>
+          <td> <button class="btn" v-on:click="handleAllStocksClick">View Aggregate Chart</button></td>
         </tr>
       </table>
 <p></p>
@@ -117,41 +117,8 @@ h2 {
 
 .table-summary {
   font-weight: bold;
-  padding-top: 10px;
+  padding-top: 15px;
   padding-left: 10px;
 }
 
-button,
-.btn,
-.btn-db-danger,
-.btn-db-update {
-  border-radius: 5px;
-  color: darkblue;
-  background-color: lightblue;
-  font-family: arial;
-  outline: none;
-}
-
-/* .btn:hover {
-  color: lightblue;
-  background-color: darkblue;
-}
-
-.btn-db-danger:hover {
-  color: lightblue;
-  background-color: red;
-}
-
-.btn-db-update:hover {
-  color: lightblue;
-  background-color: green;
-}
-
-.btn:active,
-.btn-db-danger:active,
-.btn-db-update:active {
-  position: relative;
-  top: 4px;
-  bottom: 4px;
-} */
 </style>

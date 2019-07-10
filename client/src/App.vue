@@ -3,14 +3,18 @@
     <h2>Stock Portfolio Tracker</h2>
     <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
-    <div>
-      <trend-chart v-if="stockData"
+  <p></p><p></p>
+    <div class="display-charts">
+      <div class="trend-chart">
+        <trend-chart v-if="stockData"
         :stockData="stockData"
         :chartTitle="chartTitle"
-      ></trend-chart>
-    </div>
-    <div>
-      <value-chart v-if="valueData" :valueData="valueData"></value-chart>
+        ></trend-chart>
+      </div>
+  <p></p>
+      <div class="value-chart">
+        <value-chart v-if="valueData" :valueData="valueData"></value-chart>
+      </div>
     </div>
   </div>
 
@@ -223,4 +227,42 @@ export default {
 </script>
 
 <style>
+.trend-chart, .value-chart {
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  max-width: 870px;
+}
+button,
+.btn,
+.btn-danger,
+.btn-update {
+  border-radius: 5px;
+  color: darkblue;
+  background-color: lightblue;
+  font-family: arial;
+  outline: none;
+}
+
+.btn:hover {
+  color: lightblue;
+  background-color: darkblue;
+}
+
+.btn-danger:hover {
+  color: lightblue;
+  background-color: red;
+}
+
+.btn-update:hover {
+  color: lightblue;
+  background-color: green;
+}
+
+.btn:active,
+.btn-danger:active,
+.btn-update:active {
+  position: relative;
+  top: 3px;
+  bottom: 3px;
+}
 </style>
