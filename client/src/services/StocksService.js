@@ -21,6 +21,15 @@ export default {
         .then(res => res.json())
   },
 
+  updateHolding(payload) {
+    return fetch(baseURL +payload._id, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+      })
+      .then(res => res.json())
+    },
+
   getHistData(ticker){
     return fetch(startURLAPI + ticker + endURLAPI)
     .then(res => res.json())
