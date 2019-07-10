@@ -3,9 +3,12 @@
     <h2>Hello from your valuation app!</h2>
     <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
-    <!-- <div> -->
-      <trend-chart v-if="stockData" :stockData="stockData"></trend-chart>
-    <!-- </div> -->
+    <div>
+      <trend-chart v-if="stockData"
+        :stockData="stockData"
+        :chartTitle="chartTitle"
+      ></trend-chart>
+    </div>
     <div>
       <value-chart v-if="valueData" :valueData="valueData"></value-chart>
     </div>
@@ -26,14 +29,15 @@ export default {
   data: function(){
     return {
       selectedStock: null,
-      holdings: [],
-      priceData: [],
-      total_stock_value: 0,
-      all_shares_summary: [],
-      all_shares_aggr_hist: [],
-      all_shares_value: [],
-      stockData: null,
-      valueData: null
+      holdings: [],           // data retrived from db
+      priceData: [],          // data retrived from api
+      total_stock_value: 0,   // total current value of all stocks held
+      all_shares_summary: [],   // share info summary to populate table
+      all_shares_aggr_hist: [], // total share values per day
+      // all_shares_value: [],   //NOT USED -d elete
+      stockData: null,    // data for stock trend graph
+      valueData: null,     // data for stock value graph
+      chartTitle: "Aggregated Stock Value - Daily Basis"
     }
   },
   methods: {
@@ -150,7 +154,9 @@ export default {
     (stock) => {
       this.selectedStock = stock
       this.stockData =
-        this.priceData[this.priceData.findIndex(stock => stock.symbol === this.selectedStock)].historical
+        this.priceData[this.priceData.findIndex(stock => stock.symbol === this.selectedStock)].historical;
+      // this.chartTitle = all_shares_summary[all_shares_summary.findIndex(
+      //   stock => stock.ticker === this.selectedStock].name;
     })
 
     eventBus.$on('holding-added', (holding) => {
@@ -165,6 +171,9 @@ export default {
           this.build_stock_summary_total_value()
           this.build_aggregated_historical_object()
           this.build_shares_value_object()
+          if (this.selectedStock = "") {
+            this.stockData = this.all_shares_aggr_hist;
+          }
         })
     })
 
@@ -173,7 +182,8 @@ export default {
     // }
 
     eventBus.$on('all-stocks-selected', () => {
-      this.stockData = this.all_shares_aggr_hist})
+      this.stockData = this.all_shares_aggr_hist;
+      this.chartTitle = "Aggregated Stock Value - Daily Basis"})
   },
   components: {
     'stock-table': StockTable,

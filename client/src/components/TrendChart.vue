@@ -16,14 +16,9 @@ export default {
   name: "trend-chart",
   data() {
     return {
-      chartOptions: {
-        width: 800,
-        height: 240,
-        title: "Stock Price History"
-      }
     }
   },
-  props: ['stockData'],
+  props: ['stockData', 'chartTitle'],
   components: {
     GChart
   },
@@ -35,6 +30,11 @@ export default {
         return chartData
       }
       return null
+    },
+    chartOptions: function(){
+      return { width: 800,
+      height: 240,
+      title: this.chartTitle }
     }
   }
 }
