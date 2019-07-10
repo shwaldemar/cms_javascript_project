@@ -11,13 +11,13 @@
       <td>{{ stock.name }}</td>
       <td>{{ stock.ticker }}</td>
       <td v-if="!editable">{{ stock.quantity }}</td>
-      <td v-else> <input type="number" name="quantity"
+      <td v-if="editable === stock._id"> <input type="number" name="quantity"
       v-model.number="stock.quantity" required min="1"> </td>
       <td>{{ stock.price }}</td>
       <td>{{ stock.totalvalue }}</td>
-      <td <button v-on:click="handleClick(stock)">View Chart</button></td>
+      <td> <button v-on:click="handleClick(stock)">View Chart</button></td>
       <td> <button v-on:click="setEdit(stock)">Edit</button>  </td>
-      <td> <button v-show="editable" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
+      <td> <button v-show="editable === stock._id" v-on:click="handleStockEdit(stock)">Confirm</button>  </td>
     </tr>
     <tr>
       <td>ALL STOCKS</td>
@@ -25,7 +25,7 @@
       <td>-</td>
       <td>-</td>
       <td>{{total_stock_value}}</td>
-      <td <button v-on:click="handleAllStocksClick">View Chart</button></td>
+      <td> <button v-on:click="handleAllStocksClick">View Chart</button></td>
     </tr>
 
   </div>
@@ -40,7 +40,7 @@ export default {
   props: ['stocks', 'total_stock_value'],
   data() {
     return {
-      editable: false
+      editable: ""
     }
   }, //comma inserted to fix error
   methods: {
@@ -48,12 +48,11 @@ export default {
       eventBus.$emit('stock-selected', stock.ticker)
     },
     setEdit(stock) {
-      console.log(stock);
-      this.editable = true
+      this.editable = stock._id;
     }, // inserted comma to solve error
     handleStockEdit(stock) {
       StocksService.updateHolding(stock)
-      this.editable= false
+      this.editable = ""
     },
     handleAllStocksClick() {
       eventBus.$emit('all-stocks-selected', "")

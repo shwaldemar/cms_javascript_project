@@ -168,6 +168,17 @@ export default {
         })
     })
 
+    eventBus.$on('holdingEdited',
+    () => {
+      this.all_shares_summary = []
+      this.all_shares_aggr_hist = []
+      this.valueData = []
+      this.total_stock_value = 0
+      this.build_stock_summary_total_value()
+      this.build_aggregated_historical_object()
+      this.build_shares_value_object()
+    });
+
     // const consoleLogAStringToMakeSureItWorks = () => {
     //   console.log("All Stocks Selected hit");
     // }
