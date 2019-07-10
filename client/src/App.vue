@@ -197,9 +197,9 @@ export default {
       this.chartTitle = "Aggregated Stock Value - Daily Basis" })
 
     eventBus.$on('holding-deleted', stock => {
-      const index = this.holdings.indexOf(holding => holding.id === stock._id);
+      const index = this.holdings.findIndex(holding => holding._id === stock._id);
       this.holdings.splice(index, 1);
-      const index2 = this.priceData.indexOf(histForTicker => histForTicker.symbol === stock.ticker);
+      const index2 = this.priceData.findIndex(histForTicker => histForTicker.symbol === stock.ticker);
       this.priceData.splice(index2, 1)
       this.all_shares_summary = []
       this.all_shares_aggr_hist = []
