@@ -14,6 +14,8 @@
       <td>{{ stock.price }}</td>
       <td>{{ stock.totalvalue }}</td>
       <td <button v-on:click="handleClick(stock)">View Chart</button></td>
+      <td> <button>Edit</button>  </td>
+      <td> <button v-show=false >Confirm</button>  </td>
     </tr>
     <tr>
       <td>ALL STOCKS</td>
