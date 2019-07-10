@@ -33,8 +33,6 @@ export default {
     },
     chartOptions: function(){
       return {
-      width: 800,
-      height: 240,
       title: this.chartTitle }
     }
   }

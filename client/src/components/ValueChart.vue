@@ -17,9 +17,7 @@ export default {
   data() {
     return {
       chartOptions: {
-        width: 800,
-        height: 240,
-        title: "Stock Values"
+        title: "Value of Stock Holdings"
       }
     }
   },
