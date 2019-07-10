@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="stock-app">
     <h2>Stock Portfolio Tracker</h2>
     <stock-table :stocks='all_shares_summary' :total_stock_value="total_stock_value"/>
     <new-holding-form></new-holding-form>
@@ -220,7 +220,6 @@ export default {
     'value-chart': ValueChart
   }
 }
-
 </script>
 
 <style>
