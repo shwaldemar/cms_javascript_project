@@ -191,6 +191,9 @@ export default {
       this.build_stock_summary_total_value()
       this.build_aggregated_historical_object()
       this.build_shares_value_object()
+
+      this.stockData = this.all_shares_aggr_hist;
+      this.chartTitle = "Aggregated Stock Value - Daily Basis"
     });
 
     // const consoleLogAStringToMakeSureItWorks = () => {
